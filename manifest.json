@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "NotebookLM Importer",
+  "version": "1.0",
+  "description": "Add tabs to your NotebookLM notebook.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
