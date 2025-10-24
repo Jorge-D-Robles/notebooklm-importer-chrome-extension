@@ -5,23 +5,23 @@ This Chrome extension allows you to add the current tab or all open tabs to a No
 ## Setup
 
 1.  **Load the extension in Chrome:**
-
-    -   Open Chrome and navigate to `chrome://extensions`.
-    -   Enable "Developer mode".
-    -   Click "Load unpacked" and select the directory where you saved these files.
+    *   Open Chrome and navigate to `chrome://extensions`.
+    *   Enable "Developer mode".
+    *   Click "Load unpacked" and select the directory where you saved these files.
 
 2.  **Configure the NotebookLM URL:**
-
-    -   Open your NotebookLM notebook in a browser tab.
-    -   Click on the extension's icon in the Chrome toolbar.
-    -   Copy the URL of your NotebookLM notebook and paste it into the "Notebook URL" field in the extension's popup.
-    -   Click "Save".
+    *   Open your NotebookLM notebook in a browser tab.
+    *   Click on the extension's icon in the Chrome toolbar.
+    *   Copy the URL of your NotebookLM notebook and paste it into the "Notebook URL" field in the extension's popup.
+    *   Click "Save".
 
 3.  **IMPORTANT: Update the content script:**
-    -   This extension works by simulating user actions on the NotebookLM page. To do this, it needs to know the class names of the buttons and text areas in the NotebookLM interface.
-    -   Open the `content.js` file in a text editor.
-    -   In the NotebookLM page, right-click on the "new note" button and select "Inspect". Find the class name of the button and replace `'new-note-button-class'` in `content.js` with the actual class name.
-    -   Do the same for the note editor text area (`'note-editor-class'`) and the "save note" button (`'save-note-button-class'`).
+    *   This extension works by simulating user actions on the NotebookLM page. To do this, it needs to know the class names of the buttons and text areas in the NotebookLM interface.
+    *   Open the `content.js` file in a text editor.
+    *   In the NotebookLM page, right-click on the button to add a new source and select "Inspect". Find the class name of the button and make sure it matches the selector in `content.js` (`.add-source-button`).
+    *   After clicking the add source button, a dialog will appear. Right-click on the "Website" option and inspect it. Make sure the selector in `content.js` (`.chip-group__chip`) and the text (`Website`) are correct.
+    *   Finally, inspect the text area where you paste the URL and make sure the selector `textarea[formcontrolname="newUrl"]` is correct.
+    *   You will also need to find the selector for the **Insert** button and replace `'.insert-button-class'` in `content.js` with the correct selector.
 
 ## How to Use
 

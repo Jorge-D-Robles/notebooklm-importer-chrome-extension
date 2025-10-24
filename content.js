@@ -5,34 +5,39 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function addUrlToNotebook(url) {
-  // This is a placeholder function. The actual implementation will depend on the NotebookLM UI.
-  // We need to simulate the user clicking the 'new note' button, pasting the URL, and saving the note.
-
-  // 1. Find and click the 'new note' button.
-  // Replace 'new-note-button-class' with the actual class name of the button.
-  var newNoteButton = document.querySelector('.new-note-button-class');
+  // 1. Find and click the 'Add source' button.
+  var newNoteButton = document.querySelector('.add-source-button');
   if (newNoteButton) {
     newNoteButton.click();
 
-    // 2. Find the note editor and paste the URL.
-    // Replace 'note-editor-class' with the actual class name of the editor.
+    // 2. Find and click the 'Website' chip.
     setTimeout(function() {
-      var noteEditor = document.querySelector('.note-editor-class');
-      if (noteEditor) {
-        noteEditor.value = url;
+      var websiteChip = Array.from(document.querySelectorAll('.chip-group__chip')).find(el => el.textContent.trim() === 'Website');
+      if (websiteChip) {
+        websiteChip.click();
 
-        // 3. Find and click the 'save' button.
-        // Replace 'save-note-button-class' with the actual class name of the button.
-        var saveNoteButton = document.querySelector('.save-note-button-class');
-        if (saveNoteButton) {
-          saveNoteButton.click();
-        } else {
-          console.error('Could not find the save note button.');
-        }
+        // 3. Find the note editor and paste the URL.
+        setTimeout(function() {
+          var noteEditor = document.querySelector('textarea[formcontrolname="newUrl"]');
+          if (noteEditor) {
+            noteEditor.value = Array.isArray(url) ? url.join('\n') : url;
+
+            // 4. Find and click the 'Insert' button.
+            // Replace 'insert-button-class' with the actual class name of the button.
+            var insertButton = document.querySelector('.insert-button-class');
+            if (insertButton) {
+              insertButton.click();
+            } else {
+              console.error('Could not find the insert button.');
+            }
+          } else {
+            console.error('Could not find the note editor.');
+          }
+        }, 500); // Wait for the editor to appear
       } else {
-        console.error('Could not find the note editor.');
+        console.error('Could not find the Website chip.');
       }
-    }, 500); // Wait for the editor to appear
+    }, 500); // Wait for the chip to appear
   } else {
     console.error('Could not find the new note button.');
   }
