@@ -23,8 +23,7 @@ function addUrlToNotebook(url) {
             noteEditor.value = Array.isArray(url) ? url.join('\n') : url;
 
             // 4. Find and click the 'Insert' button.
-            // Replace 'insert-button-class' with the actual class name of the button.
-            var insertButton = document.querySelector('.insert-button-class');
+            var insertButton = document.querySelector('.submit-button');
             if (insertButton) {
               insertButton.click();
             } else {
