@@ -69,34 +69,50 @@ document.addEventListener('DOMContentLoaded', function() {
     showLoader(true);
     chrome.tabs.query({url: message.notebookTabQuery}, function(notebookTabs) {
       console.log('Found', notebookTabs.length, 'notebook tabs:', notebookTabs);
-      if (notebookTabs.length > 0) {
-        // Prioritize the active tab, otherwise fall back to the first one found.
-        let targetTab = notebookTabs.find(t => t.active) || notebookTabs[0];
-        console.log('Targeting tab:', targetTab);
-
-        chrome.scripting.executeScript({target: {tabId: targetTab.id}, files: ['content.js']}, function() {
-          if (chrome.runtime.lastError) {
-            console.error('Error injecting script:', chrome.runtime.lastError.message);
-            showFeedback(false);
-            return;
-          }
-          chrome.tabs.sendMessage(targetTab.id, {action: 'addUrl', url: message.url}, function(response) {
-            if (chrome.runtime.lastError) {
-              console.error('Message sending failed:', chrome.runtime.lastError.message);
-              showFeedback(false);
-            } else if (response && response.status === 'success') {
-              console.log('Content script reported success.');
-              showFeedback(true);
-            } else {
-              console.error('Content script reported failure:', response);
-              showFeedback(false);
-            }
-          });
-        });
-      } else {
+      if (notebookTabs.length === 0) {
         console.error('NotebookLM tab not found.');
         showFeedback(false);
+        return;
       }
+
+      const targetTab = notebookTabs.find(t => t.active) || notebookTabs[0];
+      console.log('Targeting tab:', targetTab);
+
+      const sendAddUrlMessage = (tabId, url) => {
+        chrome.tabs.sendMessage(tabId, {action: 'addUrl', url: url}, function(response) {
+          if (chrome.runtime.lastError) {
+            console.error('Message sending failed:', chrome.runtime.lastError.message);
+            showFeedback(false);
+          } else if (response && response.status === 'success') {
+            console.log('Content script reported success.');
+            showFeedback(true);
+          } else {
+            console.error('Content script reported failure:', response);
+            showFeedback(false);
+          }
+        });
+      };
+
+      // Ping the tab to see if the content script is already there
+      chrome.tabs.sendMessage(targetTab.id, {action: 'ping'}, function(response) {
+        if (chrome.runtime.lastError) {
+          // Ping failed, script is not injected yet.
+          console.log('Content script not found, injecting now...');
+          chrome.scripting.executeScript({target: {tabId: targetTab.id}, files: ['content.js']}, () => {
+            if (chrome.runtime.lastError) {
+              console.error('Error injecting script:', chrome.runtime.lastError.message);
+              showFeedback(false);
+            } else {
+              console.log('Script injected successfully.');
+              sendAddUrlMessage(targetTab.id, message.url);
+            }
+          });
+        } else if (response && response.status === 'ready') {
+          // Ping successful, script is already there.
+          console.log('Content script is ready.');
+          sendAddUrlMessage(targetTab.id, message.url);
+        }
+      });
     });
   }
 

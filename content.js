@@ -1,13 +1,16 @@
 console.log("Content script loaded and ready to receive messages.")
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    console.log("Message received from popup:", request)
-    if (request.action === "addUrl") {
-        console.log('Action "addUrl" triggered for URL:', request.url)
-        addUrlToNotebook(request.url, sendResponse)
-    }
-    return true // Indicates that the response is sent asynchronously
-})
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.action === 'ping') {
+    sendResponse({status: 'ready'});
+    return;
+  }
+
+  if (request.action === 'addUrl') {
+    addUrlToNotebook(request.url, sendResponse);
+    return true; // Indicates that the response is sent asynchronously
+  }
+});
 
 function addUrlToNotebook(url, sendResponse) {
     console.log("Initiating function addUrlToNotebook with URL:", url)
