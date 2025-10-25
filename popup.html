@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NotebookLM Importer</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <h1>NotebookLM Importer</h1>
-  <div>
-    <label for="notebookUrl">Notebook URL:</label>
-    <input type="text" id="notebookUrl" size="20">
-    <button id="saveNotebookUrl">Save</button>
+    <head>
+        <title>NotebookLM Importer</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+      <div class="container">
+        <button id="help-button" class="icon-button">?</button>
+        <h1>NotebookLM Importer</h1>            <div class="input-group">
+                <input type="text" id="notebookUrl" placeholder=" " />
+                <label for="notebookUrl">Notebook URL</label>
+                <button id="saveNotebookUrl">Save</button>
+            </div>
+            <button id="addCurrentTab">Add Current Tab</button>
+            <button id="addAllTabs">Add All Tabs</button>
+            <button id="tipJarButton">
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 275.353 275.353"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M229.784,199.712c27.269,0,45.568-29.692,45.568-57.419c0-20.117-12.418-22.843-24.562-22.843 c-3.468,0-7.21,0.234-11.167,0.479c-3.195,0.176-6.507,0.332-9.848,0.41l0.039-0.889H1.514c0,42.959,24.132,80.321,59.686,99.49 C24.787,221.333,0,226.043,0,231.445c0,7.865,51.782,14.196,115.659,14.196s115.649-6.331,115.649-14.196 c0-5.432-24.904-10.132-61.454-12.516c10.63-5.725,20.263-13.004,28.529-21.641 C208.026,199.712,219.448,199.712,229.784,199.712z M229.364,128.272c3.683-0.088,7.289-0.244,10.737-0.469 c3.83-0.205,7.464-0.42,10.698-0.42c11.509,0,16.658,2.159,16.658,14.909c0,23.419-15.466,49.515-37.664,49.515 c-9.751,0-18.3-0.205-25.285-1.358C218.559,173.196,227.537,151.731,229.364,128.272z M98.982,97.203 c-0.557-0.547-13.414-13.922,0.156-30.327c16.58-20,0.01-37-0.156-37.166l-3.595,3.595c0.557,0.537,13.414,13.932-0.166,30.327 c-16.58,20.029-0.01,37.039,0.166,37.195L98.982,97.203z M118.737,97.203c-0.557-0.547-13.414-13.922,0.166-30.327 c16.56-20,0-37-0.166-37.166l-3.605,3.595c0.557,0.537,13.414,13.932-0.156,30.327c-16.56,20.039-0.01,37.039,0.166,37.205 L118.737,97.203z M140.251,97.203c-0.557-0.547-13.414-13.922,0.156-30.327c16.57-20,0-37-0.156-37.166l-3.615,3.595 c0.547,0.537,13.424,13.932-0.166,30.327c-16.56,20.039,0,37.039,0.176,37.205L140.251,97.203z"
+                    />
+                </svg>
+      <span>Tip Jar</span>
+    </button>
+    <div id="feedback-overlay" class="hidden">
+      <div class="spinner"></div>
+      <svg id="success-icon" class="feedback-icon hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#34a853"/>
+      </svg>
+      <svg id="failure-icon" class="feedback-icon hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#ea4335"/>
+      </svg>
+    </div>
+    <div id="help-modal" class="hidden">
+      <div class="modal-content">
+        <button id="close-help-button" class="icon-button">&times;</button>
+        <h2>How to Use</h2>
+        <ol>
+          <li>Open a NotebookLM notebook in a browser tab.</li>
+          <li>Copy the URL of that notebook.</li>
+          <li>Paste the URL into the "Notebook URL" box in this popup and click <strong>Save</strong>. This is a one-time setup.</li>
+          <li>To add a single website, open it in your current tab and click <strong>Add Current Tab</strong>.</li>
+          <li>To add all your open websites, click <strong>Add All Tabs</strong>.</li>
+        </ol>
+      </div>
+    </div>
   </div>
-  <button id="addCurrentTab">Add Current Tab</button>
-  <button id="addAllTabs">Add All Tabs</button>
-  <script src="popup.js"></script>
-</body>
+        <script src="popup.js"></script>
+    </body>
 </html>
