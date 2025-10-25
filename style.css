@@ -53,11 +53,6 @@ h1 {
   color: #1a73e8;
 }
 
-
-.input-group input:focus + #saveNotebookUrl {
-  /* Optional: style sibling on focus */
-}
-
 button {
   display: flex;
   align-items: center;
@@ -78,6 +73,26 @@ button {
 
 button:active {
   box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3);
+}
+
+.icon-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: #e0e0e0;
+  color: #5f6368;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: none;
+  z-index: 10;
 }
 
 #saveNotebookUrl {
@@ -140,4 +155,10 @@ button:active {
 .feedback-icon {
   width: 48px;
   height: 48px;
+}
+
+.help {
+  font-size: 1rem;
+  width: fit-content;
+  padding: 1rem;
 }
