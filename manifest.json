@@ -9,13 +9,10 @@
     "scripting",
     "storage"
   ],
+  "host_permissions": [
+    "https://notebooklm.google.com/*"
+  ],
   "action": {
     "default_popup": "popup.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://notebooklm.google.com/*"],
-      "js": ["content.js"]
-    }
-  ]
+  }
 }
