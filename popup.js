@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var addAllTabsButton = document.getElementById('addAllTabs');
   var tipJarButton = document.getElementById('tipJarButton');
   var helpButton = document.getElementById('help-button');
-  var helpModal = document.getElementById('help-modal');
-  var closeHelpButton = document.getElementById('close-help-button');
 
   var overlay = document.getElementById('feedback-overlay');
   var spinner = overlay.querySelector('.spinner');
@@ -144,10 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   helpButton.addEventListener('click', function() {
-    helpModal.classList.remove('hidden');
-  });
-
-  closeHelpButton.addEventListener('click', function() {
-    helpModal.classList.add('hidden');
+    chrome.tabs.create({url: 'help.html'});
   });
 });
