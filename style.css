@@ -162,3 +162,84 @@ button:active {
   width: fit-content;
   padding: 1rem;
 }
+
+#reportBugButton {
+  background-color: #ffffff;
+  color: #5f6368;
+  gap: 8px;
+}
+
+#reportBugButton svg {
+  color: #5f6368;
+}
+
+/* Bug Report Overlay */
+#bug-report-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 16px;
+}
+
+.bug-report-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bug-report-container h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #202124;
+}
+
+.bug-report-container textarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  resize: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.bug-report-container textarea:focus {
+  outline: none;
+  border: 2px solid #1a73e8;
+  padding: 7px; /* Adjust for border width */
+}
+
+.bug-report-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.bug-report-actions button {
+  margin-bottom: 0;
+}
+
+button.secondary {
+  background-color: #ffffff;
+  color: #1a73e8;
+  border: 1px solid #dadce0;
+  box-shadow: none;
+}
+
+button.secondary:hover {
+  background-color: #f8f9fa;
+}
+
+#sendBugReport {
+  background-color: #1a73e8;
+  color: white;
+}
