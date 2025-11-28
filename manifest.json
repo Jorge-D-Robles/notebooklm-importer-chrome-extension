@@ -4,10 +4,10 @@
   "version": "0.0.1",
   "description": "Add tabs to your NotebookLM notebook.",
   "icons": {
-    "16": "icon.png",
-    "32": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png"
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "permissions": [
     "tabs",
