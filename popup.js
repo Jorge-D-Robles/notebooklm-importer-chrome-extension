@@ -163,30 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Bug Report Logic
   var reportBugButton = document.getElementById('reportBugButton');
-  var bugReportOverlay = document.getElementById('bug-report-overlay');
-  var cancelBugReportButton = document.getElementById('cancelBugReport');
-  var sendBugReportButton = document.getElementById('sendBugReport');
-  var bugDescriptionInput = document.getElementById('bugDescription');
 
   reportBugButton.addEventListener('click', function() {
-    bugReportOverlay.classList.remove('hidden');
-    bugDescriptionInput.focus();
-  });
-
-  cancelBugReportButton.addEventListener('click', function() {
-    bugReportOverlay.classList.add('hidden');
-    bugDescriptionInput.value = '';
-  });
-
-  sendBugReportButton.addEventListener('click', function() {
-    var description = bugDescriptionInput.value;
-    var subject = encodeURIComponent('NotebookLM Importer Bug Report');
-    var body = encodeURIComponent(description);
-    var mailtoUrl = `mailto:jorgeroblesdev@gmail.com?subject=${subject}&body=${body}`;
-
-    chrome.tabs.create({ url: mailtoUrl });
-
-    bugReportOverlay.classList.add('hidden');
-    bugDescriptionInput.value = '';
+    chrome.tabs.create({ url: 'https://github.com/Jorge-D-Robles/notebooklm-importer-chrome-extension/issues/new' });
   });
 });
